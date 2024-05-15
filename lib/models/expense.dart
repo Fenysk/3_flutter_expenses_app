@@ -1,10 +1,20 @@
+import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
-
-const uuid = Uuid();
-
-String get _generatedNewId => 'exps_${uuid.v4().replaceAll('-', '')}';
+import 'package:intl/intl.dart';
 
 enum Category { food, travel, leisure, work }
+
+final formatter = DateFormat.yMd();
+
+Map<Category, IconData> categoryIcons = {
+  Category.food: Icons.lunch_dining,
+  Category.leisure: Icons.flight_takeoff,
+  Category.travel: Icons.movie,
+  Category.work: Icons.work,
+};
+
+const uuid = Uuid();
+String get _generatedNewId => 'exps_${uuid.v4().replaceAll('-', '')}';
 
 class Expense {
   Expense({
@@ -19,4 +29,6 @@ class Expense {
   final double amount; // 45.50
   final DateTime createdAt;
   final Category category; // leisure Expense(categ)
+
+  String get formattedDate => formatter.format(createdAt);
 }
