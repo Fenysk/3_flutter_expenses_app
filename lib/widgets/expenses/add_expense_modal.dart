@@ -45,7 +45,9 @@ class _AddExpenseModalState extends State<AddExpenseModal> {
           Row(
             children: [
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 child: const Text('Annuler'),
               ),
               const Spacer(),
@@ -53,6 +55,7 @@ class _AddExpenseModalState extends State<AddExpenseModal> {
                 onPressed: () {
                   print(_titleController.text);
                   print(_amountController.text);
+                  Navigator.pop(context);
                 },
                 child: const Text('Enregistrer la dépense'),
               ),
