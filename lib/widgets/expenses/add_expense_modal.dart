@@ -12,6 +12,7 @@ class _AddExpenseModalState extends State<AddExpenseModal> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime? _selectedDate;
+  Category? _selectedCategory;
 
   void _presentDatePicker() async {
     final now = DateTime.now();
@@ -24,9 +25,7 @@ class _AddExpenseModalState extends State<AddExpenseModal> {
       lastDate: now,
     );
 
-    setState(() {
-      _selectedDate = pickedDate;
-    });
+    setState(() => _selectedDate = pickedDate);
   }
 
   @override
@@ -86,8 +85,22 @@ class _AddExpenseModalState extends State<AddExpenseModal> {
               ),
             ],
           ),
+          const SizedBox(height: 16),
           Row(
             children: [
+              DropdownButton(
+                value: _selectedCategory,
+                items: Category.values
+                    .map((category) => DropdownMenuItem(
+                          value: category,
+                          child: Text(category.name.toUpperCase()),
+                        ))
+                    .toList(),
+                onChanged: (newValue) {
+                  if (newValue == null) return;
+                  setState(() => _selectedCategory = newValue);
+                },
+              ),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -101,6 +114,7 @@ class _AddExpenseModalState extends State<AddExpenseModal> {
                   print(_amountController.text);
                   if (_selectedDate != null)
                     print(formatter.format(_selectedDate!));
+                  if (_selectedCategory != null) print(_selectedCategory);
                   Navigator.pop(context);
                 },
                 child: const Text('Enregistrer la dépense'),
