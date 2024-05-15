@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:expenses_app/models/expense.dart';
-import 'package:expenses_app/widgets/expenses_list/expenses_list.dart';
+import 'package:expenses_app/widgets/expenses/expenses_list.dart';
+import 'package:expenses_app/widgets/expenses/add_expense_modal.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -25,6 +26,13 @@ class _ExpensesState extends State<Expenses> {
     )
   ];
 
+  void _openAddExpenseOverlay() {
+    showModalBottomSheet(
+      context: context,
+      builder: (modalContext) => const AddExpenseModal(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +41,7 @@ class _ExpensesState extends State<Expenses> {
         backgroundColor: Colors.green,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: _openAddExpenseOverlay,
             icon: const Icon(Icons.add),
           ),
         ],
