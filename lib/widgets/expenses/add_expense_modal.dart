@@ -9,10 +9,12 @@ class AddExpenseModal extends StatefulWidget {
 
 class _AddExpenseModalState extends State<AddExpenseModal> {
   final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
 
   @override
   void dispose() {
     _titleController.dispose();
+    _amountController.dispose();
     super.dispose();
   }
 
@@ -23,20 +25,37 @@ class _AddExpenseModalState extends State<AddExpenseModal> {
       child: Column(
         children: [
           TextField(
-            maxLength: 50,
             controller: _titleController,
             decoration: const InputDecoration(
-              label: Text('Sujet de la dépense'),
+              label: Text('Sujet'),
+            ),
+            maxLength: 50,
+          ),
+          TextField(
+            controller: _amountController,
+            decoration: const InputDecoration(
+              label: Text('Montant'),
+              prefixText: '€ ',
+            ),
+            keyboardType: const TextInputType.numberWithOptions(
+              signed: false,
+              decimal: false,
             ),
           ),
           Row(
             children: [
+              TextButton(
+                onPressed: () {},
+                child: const Text('Annuler'),
+              ),
+              const Spacer(),
               ElevatedButton(
                 onPressed: () {
                   print(_titleController.text);
+                  print(_amountController.text);
                 },
-                child: const Text('Save Expense'),
-              )
+                child: const Text('Enregistrer la dépense'),
+              ),
             ],
           )
         ],
