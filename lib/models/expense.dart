@@ -14,7 +14,7 @@ class Expense {
     required this.category,
   }) : id = _generatedNewId;
 
-  final String id; // exps_12345678
+  final String id; // exps_123456789ABCDE
   final String title; // Assurance
   final double amount; // 45.50
   final DateTime createdAt;
