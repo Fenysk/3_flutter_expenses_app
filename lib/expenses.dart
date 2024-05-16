@@ -39,12 +39,21 @@ class _ExpensesState extends State<Expenses> {
   void _addNewExpense(Expense newExpense) =>
       setState(() => _registerdExpenses.add(newExpense));
 
-  void _removeExpense(Expense expenseToRemove) {
-    setState(() => _registerdExpenses.remove(expenseToRemove));
-  }
+  void _removeExpense(Expense expenseToRemove) =>
+      setState(() => _registerdExpenses.remove(expenseToRemove));
 
   @override
   Widget build(BuildContext context) {
+    Widget mainContent =
+        const Center(child: Text('No expenses found. Start adding some !'));
+
+    if (_registerdExpenses.isNotEmpty) {
+      mainContent = ExpensesList(
+        expenses: _registerdExpenses,
+        onRemoveExpense: _removeExpense,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Expense Tracker'),
@@ -60,12 +69,7 @@ class _ExpensesState extends State<Expenses> {
         children: [
           const Text('Chart'),
           const Text('Expenses list'),
-          Expanded(
-            child: ExpensesList(
-              expenses: _registerdExpenses,
-              onRemoveExpense: _removeExpense,
-            ),
-          )
+          Expanded(child: mainContent)
         ],
       ),
     );
