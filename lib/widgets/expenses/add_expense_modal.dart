@@ -28,6 +28,36 @@ class _AddExpenseModalState extends State<AddExpenseModal> {
     setState(() => _selectedDate = pickedDate);
   }
 
+  void _submitNewExpenseData() {
+    final enteredAmount = double.tryParse(_amountController.text);
+    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
+
+    if (_titleController.text.trim().isEmpty ||
+        amountIsInvalid ||
+        _selectedCategory == null ||
+        _selectedDate == null) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Oups !'),
+          content: const Text('Merci de vérifier les données entrées.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Dakodak'),
+            )
+          ],
+        ),
+      );
+
+      return;
+    }
+
+    Navigator.pop(context);
+  }
+
   @override
   void dispose() {
     _titleController.dispose();
@@ -109,14 +139,7 @@ class _AddExpenseModalState extends State<AddExpenseModal> {
               ),
               const Spacer(),
               ElevatedButton(
-                onPressed: () {
-                  print(_titleController.text);
-                  print(_amountController.text);
-                  if (_selectedDate != null)
-                    print(formatter.format(_selectedDate!));
-                  if (_selectedCategory != null) print(_selectedCategory);
-                  Navigator.pop(context);
-                },
+                onPressed: _submitNewExpenseData,
                 child: const Text('Enregistrer la dépense'),
               ),
             ],
