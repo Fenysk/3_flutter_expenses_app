@@ -75,7 +75,6 @@ class _ExpensesState extends State<Expenses> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Expense Tracker'),
-        backgroundColor: Colors.green,
         actions: [
           IconButton(
             onPressed: _openAddExpenseOverlay,
@@ -85,9 +84,15 @@ class _ExpensesState extends State<Expenses> {
       ),
       body: Column(
         children: [
-          const Text('Chart'),
-          const Text('Expenses list'),
-          Expanded(child: mainContent)
+          Container(
+            width: double.infinity,
+            height: 100,
+            padding: const EdgeInsets.all(16),
+            child: const Placeholder(
+              child: Text('Chart'),
+            ),
+          ),
+          Expanded(child: mainContent),
         ],
       ),
     );
