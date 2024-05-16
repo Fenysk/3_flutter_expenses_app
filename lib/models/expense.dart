@@ -8,8 +8,8 @@ final formatter = DateFormat.yMd();
 
 Map<Category, IconData> categoryIcons = {
   Category.food: Icons.lunch_dining,
-  Category.leisure: Icons.flight_takeoff,
-  Category.travel: Icons.movie,
+  Category.leisure: Icons.movie,
+  Category.travel: Icons.flight_takeoff,
   Category.work: Icons.work,
 };
 
