@@ -39,8 +39,26 @@ class _ExpensesState extends State<Expenses> {
   void _addNewExpense(Expense newExpense) =>
       setState(() => _registerdExpenses.add(newExpense));
 
-  void _removeExpense(Expense expenseToRemove) =>
-      setState(() => _registerdExpenses.remove(expenseToRemove));
+  void _removeExpense(Expense expenseToRemove) {
+    final expenseIndex = _registerdExpenses.indexOf(expenseToRemove);
+
+    setState(() => _registerdExpenses.remove(expenseToRemove));
+
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 3),
+        content: Text('"${expenseToRemove.title}" supprimée !'),
+        action: SnackBarAction(
+          label: 'Annuler',
+          onPressed: () {
+            setState(
+                () => _registerdExpenses.insert(expenseIndex, expenseToRemove));
+          },
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
