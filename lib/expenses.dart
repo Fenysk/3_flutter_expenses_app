@@ -32,6 +32,7 @@ class _ExpensesState extends State<Expenses> {
       builder: (modalContext) => AddExpenseModal(
         onAddExpense: _addNewExpense,
       ),
+      isScrollControlled: true,
     );
   }
 
