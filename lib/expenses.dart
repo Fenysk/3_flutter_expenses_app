@@ -22,6 +22,7 @@ class _ExpensesState extends State<Expenses> {
         onAddExpense: _addNewExpense,
       ),
       isScrollControlled: true,
+      useSafeArea: true,
     );
   }
 

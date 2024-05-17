@@ -84,7 +84,7 @@ class _AddExpenseModalState extends State<AddExpenseModal> {
       height: double.infinity,
       child: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(16, 48, 16, keyboardSpacing + 16),
+          padding: EdgeInsets.fromLTRB(16, 16, 16, keyboardSpacing + 16),
           child: Column(
             children: [
               TextField(
