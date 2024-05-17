@@ -3,6 +3,7 @@ import 'package:expenses_app/models/expense.dart';
 import 'package:expenses_app/widgets/expenses/expenses_list.dart';
 import 'package:expenses_app/widgets/expenses/add_expense_modal.dart';
 import 'package:expenses_app/widgets/chart/chart.dart';
+import 'package:expenses_app/data/expenses_data.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -12,20 +13,7 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
-  final List<Expense> _registerdExpenses = [
-    Expense(
-      title: 'Sushi Academy',
-      amount: 61.50,
-      createdAt: DateTime.now(),
-      category: Category.food,
-    ),
-    Expense(
-      title: 'Chat GPT',
-      amount: 24,
-      createdAt: DateTime.now(),
-      category: Category.work,
-    )
-  ];
+  final List<Expense> _registerdExpenses = expensesData;
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
