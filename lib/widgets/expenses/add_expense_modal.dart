@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:expenses_app/models/expense.dart';
+import 'package:flutter/cupertino.dart';
+import 'dart:io';
 
 class AddExpenseModal extends StatefulWidget {
   const AddExpenseModal({super.key, required this.onAddExpense});
@@ -30,14 +32,8 @@ class _AddExpenseModalState extends State<AddExpenseModal> {
     setState(() => _selectedDate = pickedDate);
   }
 
-  void _submitNewExpenseData() {
-    final enteredAmount = double.tryParse(_amountController.text);
-    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
-
-    if (_titleController.text.trim().isEmpty ||
-        amountIsInvalid ||
-        _selectedCategory == null ||
-        _selectedDate == null) {
+  void _showDialog() {
+    if (Platform.isAndroid) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -53,7 +49,34 @@ class _AddExpenseModalState extends State<AddExpenseModal> {
           ],
         ),
       );
+    } else {
+      showCupertinoDialog(
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+          title: const Text('Oups !'),
+          content: const Text('Merci de vérifier les données entrées.'),
+          actions: [
+            CupertinoButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Dakodak'),
+            )
+          ],
+        ),
+      );
+    }
+  }
 
+  void _submitNewExpenseData() {
+    final enteredAmount = double.tryParse(_amountController.text);
+    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
+
+    if (_titleController.text.trim().isEmpty ||
+        amountIsInvalid ||
+        _selectedCategory == null ||
+        _selectedDate == null) {
+      _showDialog();
       return;
     }
 
