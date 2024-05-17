@@ -13,7 +13,7 @@ class ExpensesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       itemCount: expenses.length,
       itemBuilder: ((context, index) => Dismissible(
             key: ValueKey(expenses[index]),
